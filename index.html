@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>День айтівця — випробуй свої здібності!</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7dd3fc;--muted:#94a3b8}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#06111a 0%, #071426 100%);color:#e6f0ff}
+    .container{max-width:980px;margin:32px auto;padding:24px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:20px;margin-top:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .role-header{display:flex;align-items:center;gap:10px}
+    .role-header h2{margin:0;font-size:1.1rem}
+    label{display:block;margin-top:12px;font-weight:600}
+    input[type=text], input[type=number], textarea, select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    button{background:var(--accent);border:none;padding:10px 12px;border-radius:10px;color:#022;cursor:pointer;font-weight:600}
+    .small{font-size:0.9rem;color:var(--muted)}
+    .score{font-size:1rem;font-weight:700;color:var(--accent)}
+    .puzzle{margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.01)}
+    .ok{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.18);padding:8px;border-radius:8px}
+    .wrong{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.12);padding:8px;border-radius:8px}
+    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+    @media (max-width:900px){.grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>День айтівця — випробуй свої здібності!</h1>
+        <p class="lead">Спробуй себе у ролі айті-програміста та айті-тестувальника!</p>
+      </div>
+      <div class="card" style="min-width:200px;text-align:right">
+        <div class="small">Твій рахунок</div>
+        <div class="score" id="totalScore">0</div>
+        <div class="small">Бейджі: <span id="badges">—</span></div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <section class="card">
+          <div class="role-header">
+            <h2>Роль: Програміст — логічні завдання</h2>
+            <div style="margin-left:auto" class="small">Спробуй 4 завдання різної складності</div>
+          </div>
+
+          <div class="puzzle" id="puzzle2">
+            <strong>1) Алгоритмічна операція</strong>
+            <p class="small">Маємо список <code>[2,4,6]</code>. Додаємо число 3 та помножимо кожне на 2. Яке останнє число списку?</p>
+            <input type="number" id="p2input" placeholder="Твоя відповідь" />
+            <div style="margin-top:8px"><button onclick="checkP2()">Перевірити</button></div>
+            <div id="p2res" class="small" style="margin-top:8px"></div>
+          </div>
+
+          <div class="puzzle" id="puzzle3">
+            <strong>2) Арифметична логіка</strong>
+            <p class="small">Якщо <code>x = 5</code>, далі <code>x = x + 3 * 2</code>. Яке значення <code>x</code>?</p>
+            <input type="number" id="p3input" placeholder="Твоя відповідь" />
+            <div style="margin-top:8px"><button onclick="checkP3()">Перевірити</button></div>
+            <div id="p3res" class="small" style="margin-top:8px"></div>
+          </div>
+
+          <div class="puzzle" id="puzzle4">
+            <strong>3) Вибірка чисел</strong>
+            <p class="small">Список <code>[1,2,3,4,5]</code>. Вибери всі числа, які при поділі на 2 дають залишок 1. Яке останнє таке число?</p>
+            <input type="number" id="p4input" placeholder="Твоя відповідь" />
+            <div style="margin-top:8px"><button onclick="checkP4()">Перевірити</button></div>
+            <div id="p4res" class="small" style="margin-top:8px"></div>
+          </div>
+
+          <div class="puzzle" id="puzzle5">
+            <strong>4) Комбінаторика</strong>
+            <p class="small">Є 3 кнопки: червона, синя, зелена. Натискаємо будь-яку по одній раз. Скільки різних порядків натискання можливі?</p>
+            <input type="number" id="p5input" placeholder="Твоя відповідь" />
+            <div style="margin-top:8px"><button onclick="checkP5()">Перевірити</button></div>
+            <div id="p5res" class="small"></div>
+          </div>
+
+        </section>
+
+        <section class="card" style="margin-top:18px">
+          <div class="role-header">
+            <h2>Роль: Тестувальник — знайди баг</h2>
+            <div style="margin-left:auto" class="small">Спробуй 2 завдання</div>
+          </div>
+
+          <div class="puzzle" id="test1">
+            <strong>1) Логічна помилка у циклі</strong>
+            <p class="small">Програма повинна вивести числа від 1 до 5 включно:</p>
+            <pre style="background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;">for i in range(1,5):
+    print(i)</pre>
+            <p class="small">Що треба змінити?</p>
+            <input type="text" id="test1input" placeholder="Опиши виправлення" />
+            <div style="margin-top:8px"><button onclick="checkTest1()">Перевірити</button></div>
+            <div id="test1res" class="small"></div>
+          </div>
+
+          <div class="puzzle" id="test2">
+            <strong>2) Знайди помилку у коді</strong>
+            <p class="small">Програма повинна вивести суму чисел від 1 до 3:</p>
+            <pre style="background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;">total = 0
+for i in range(1,4):
+    total = total + 1
+print(total)</pre>
+            <p class="small">Що не так у коді?</p>
+            <input type="text" id="test2input" placeholder="Опиши виправлення" />
