@@ -109,3 +109,57 @@ for i in range(1,4):
 print(total)</pre>
             <p class="small">Що не так у коді?</p>
             <input type="text" id="test2input" placeholder="Опиши виправлення" />
+            <div style="margin-top:8px"><button onclick="checkTest2()">Перевірити</button></div>
+            <div id="test2res" class="small"></div>
+          </div>
+
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function checkP2() {
+      const ans = parseInt(document.getElementById('p2input').value);
+      const res = document.getElementById('p2res');
+      res.textContent = ans === 18 ? 'Правильно!' : 'Неправильно, спробуй ще раз.';
+      res.className = ans === 18 ? 'ok' : 'wrong';
+    }
+
+    function checkP3() {
+      const ans = parseInt(document.getElementById('p3input').value);
+      const res = document.getElementById('p3res');
+      res.textContent = ans === 11 ? 'Правильно!' : 'Неправильно, спробуй ще раз.';
+      res.className = ans === 11 ? 'ok' : 'wrong';
+    }
+
+    function checkP4() {
+      const ans = parseInt(document.getElementById('p4input').value);
+      const res = document.getElementById('p4res');
+      res.textContent = ans === 5 ? 'Правильно!' : 'Неправильно, спробуй ще раз.';
+      res.className = ans === 5 ? 'ok' : 'wrong';
+    }
+
+    function checkP5() {
+      const ans = parseInt(document.getElementById('p5input').value);
+      const res = document.getElementById('p5res');
+      res.textContent = ans === 6 ? 'Правильно!' : 'Неправильно, спробуй ще раз.';
+      res.className = ans === 6 ? 'ok' : 'wrong';
+    }
+
+    function checkTest1() {
+      const ans = document.getElementById('test1input').value.toLowerCase();
+      const res = document.getElementById('test1res');
+      res.textContent = ans.includes('5') ? 'Правильно! Змінити кінець range на 6 або 1 до 5 включно.' : 'Спробуй ще раз.';
+      res.className = ans.includes('5') ? 'ok' : 'wrong';
+    }
+
+    function checkTest2() {
+      const ans = document.getElementById('test2input').value.toLowerCase();
+      const res = document.getElementById('test2res');
+      res.textContent = ans.includes('i') || ans.includes('range') ? 'Правильно! В циклі потрібно додавати i, а не 1.' : 'Спробуй ще раз.';
+      res.className = ans.includes('i') || ans.includes('range') ? 'ok' : 'wrong';
+    }
+  </script>
+</body>
+</html>
